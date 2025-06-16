@@ -113,13 +113,19 @@ Examples:
 - "I want to join" (if unclear) → assignment_id = null
 
 ```
+If the user gives a message that involves more than one group action (e.g., "Create a group in A2"), respond with a list of intents like:
+
+[
+  { "type": "intent", "action": "select_assignment", "assignment_id": "A2" },
+  { "type": "intent", "action": "create_group", "assignment_id": "A2" }
+]
+
 If the user gives a message that involves more than one group action (e.g., "Select A1 and create a group"), respond with a list of intents like:
 
 [
   { "type": "intent", "action": "select_assignment", "assignment_id": "A1" },
   { "type": "intent", "action": "create_group", "assignment_id": "A1" }
 ]
-
 ---
 
 ⚠️ **Rules:**
