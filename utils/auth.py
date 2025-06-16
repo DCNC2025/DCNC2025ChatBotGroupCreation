@@ -138,19 +138,28 @@ def generate_otp(length: int = 6) -> str:
     return ''.join([str(random.randint(0, 9)) for _ in range(length)])
 
 def send_otp_email(email: str, otp: str) -> bool:
+    try:
+        import streamlit as st
+        api_key = st.secrets.get("SENDGRID_API_KEY")
+        sender_email = st.secrets.get("SENDER_EMAIL")
+    except Exception as e:
+        print(f"[ERROR] Failed to load Streamlit secrets: {e}")
+        return False
+
     message = Mail(
-        from_email=SENDER_EMAIL,
+        from_email=sender_email,
         to_emails=email,
         subject='Your RMIT Verification Code',
         html_content=f'<strong>Your verification code is: {otp}</strong>'
     )
     try:
-        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        sg = SendGridAPIClient(api_key)
         sg.send(message)
         return True
     except Exception as e:
         print(f"SendGrid error: {e}")
         return False
+
 
 def store_otp(email: str, otp: str):
     otps = {}
