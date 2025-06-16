@@ -875,7 +875,8 @@ body {{
 </style>
 """, unsafe_allow_html=True)
 #USERNAME = "testuser@student.rmit.edu.in"
-USERNAME = st.session_state.get('user_info', {}).get('email', 'Unknown')
+USERNAME = st.session_state.user_info["email"] if "user_info" in st.session_state and "email" in st.session_state.user_info else "Unknown"
+
 
 with open("data/assignments.json", "r") as f:
     assignments = json.load(f)
