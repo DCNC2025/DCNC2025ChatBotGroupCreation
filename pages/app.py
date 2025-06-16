@@ -874,7 +874,8 @@ body {{
      }}
 </style>
 """, unsafe_allow_html=True)
-USERNAME = "testuser@student.rmit.edu.in"
+#USERNAME = "testuser@student.rmit.edu.in"
+USERNAME = st.session_state.get('user_info', {}).get('email', 'Unknown')
 
 with open("data/assignments.json", "r") as f:
     assignments = json.load(f)
@@ -895,25 +896,30 @@ if "selected_assignment" not in st.session_state:
 if "selected_model" not in st.session_state:
     st.session_state.selected_model = "anthropic.claude-3-haiku-20240307-v1:0"
 
+# Remove multipage navigation links from sidebar
+st.markdown("""
+    <style>
+    [data-testid="stSidebarNav"] { display: none !important; }
+    </style>
+""", unsafe_allow_html=True)
+
 with st.sidebar:
     # User Profile Section
-    # st.markdown("<div class='sidebar-section'>", unsafe_allow_html=True)
     st.markdown("### 👤 Profile")
-    
-    # User Info Card - More compact
+    user_info = st.session_state.get('user_info', {})
+    user_email = user_info.get('email', 'Unknown')
+    user_role = user_info.get('role', 'Student').capitalize()
     user_info_html = f"""
-    <div class='sidebar-card user-profile-card'>
-        <div class='user-avatar'><span style='display:inline-block;'>👨‍🎓</span></div>
-        <div class='user-details'>
-            <div class='user-name'>{USERNAME}</div>
-            <div class='user-role'>Student</div>
+    <div class='sidebar-card user-profile-card' style='width: 100%; min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,255,255,1), rgba(245,245,245,0.95)); border-radius: 12px; padding: 1.2rem 0.5rem; margin: 0.7rem 0; box-shadow: 0 2px 6px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.07);'>
+        <div class='user-avatar' style='font-size: 2rem; background: linear-gradient(135deg, #e60028, #7b1fa2); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.08);'>👨‍🎓</div>
+        <div class='user-details' style='width: 100%; text-align: center;'>
+            <div class='user-name' style='font-weight: 600; font-size: 1rem; color: #000; margin-bottom: 0.2rem; word-break: break-all; white-space: pre-wrap;'>{user_email}</div>
+            <div class='user-role' style='font-size: 0.85rem; color: #333; opacity: 0.9;'>{user_role}</div>
         </div>
     </div>
     """
     st.markdown(user_info_html, unsafe_allow_html=True)
-    
-    # Current Session Info - More compact
-    #st.markdown("<div class='session-info'>", unsafe_allow_html=True)
+    # Current Session Info
     if st.session_state.selected_assignment:
         st.markdown(f"<div class='info-item'><span class='info-label'>📝</span> <span class='info-value'>{st.session_state.selected_assignment}</span></div>", unsafe_allow_html=True)
     
@@ -925,49 +931,27 @@ with st.sidebar:
     st.markdown(f"<div class='info-item'><span class='info-label'>🤖</span> <span class='info-value'>{current_model}</span></div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
-    
-    # Model Selection Section
-    # st.markdown("<div class='sidebar-section'>", unsafe_allow_html=True)
+        # Model Selection Section
     st.markdown("### 🤖 AI Model")
-    
     model_options = {
         "Claude 3 Haiku": "anthropic.claude-3-haiku-20240307-v1:0",
         "Claude 3.5 Sonnet": "anthropic.claude-3-5-sonnet-20240620-v1:0"
     }
-    
-    # Add custom CSS for selected model
-    st.markdown("""
-    <style>
-    .selected-model {
-        border-color: #4CAF50 !important;
-        background-color: rgba(76, 175, 80, 0.2) !important;
-        color: #000000 !important;
-        font-weight: 600 !important;
-    }
-    .selected-model-indicator {
-        height: 4px;
-        background: linear-gradient(90deg, #4CAF50, #2196F3);
-        margin-bottom: 5px;
-        border-radius: 3px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
     for name, model_id in model_options.items():
-        is_selected = st.session_state.selected_model == model_id
+        is_selected = st.session_state.get('selected_model', '') == model_id
         button_prefix = "✓ " if is_selected else ""
         button_key = f"model_{model_id}"
-        
-        # Apply custom styling based on selection state
         if is_selected:
             st.markdown(f"<div class='selected-model-indicator'></div>", unsafe_allow_html=True)
-            
         if st.button(f"{button_prefix}{name}", key=button_key):
             st.session_state.selected_model = model_id
             st.rerun()
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+    # Logout button at the bottom
+    st.markdown("---")
+    if st.button("Logout"):
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]
+        st.switch_page('login.py')
 
 # Modern header with RMIT logo and gradient background
 logo_base64 = get_logo_base64()

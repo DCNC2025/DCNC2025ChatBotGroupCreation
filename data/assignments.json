@@ -5,24 +5,25 @@
     "description": "Form a group of 3 students max",
     "created_by": "instructor@rmit.edu.au",
     "created_on": "2025-05-18",
+    "Due_date": "2025-06-18",
     "Maximum Group Members": "3"
   },
-
   {
     "assignment_id": "A2",
     "title": "Reliable data transmission",
     "description": "Form a group of 3 students max",
     "created_by": "instructor@rmit.edu.au",
     "created_on": "2025-04-19",
+    "Due_date": "2025-05-19",
     "Maximum Group Members": "3"
   },
-
-   {
+  {
     "assignment_id": "A1",
     "title": "Technical report",
     "description": "Form a group of 2 students max",
     "created_by": "instructor@rmit.edu.au",
     "created_on": "2025-04-5",
+    "Due_date": "2025-05-5",
     "Maximum Group Members": "2"
   }
 ]

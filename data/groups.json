@@ -63,6 +63,23 @@
         "s430010@rmit.edu.au"
       ],
       "created_by": "s430008@rmit.edu.au"
+    },
+    {
+      "group_id": "A2-G4",
+      "group_name": "Test Group",
+      "members": [
+        "testuser@student.rmit.edu.in"
+      ],
+      "created_by": "testuser@student.rmit.edu.in"
+    },
+    {
+      "group_id": "A2-G5",
+      "group_name": "Group1",
+      "members": [
+        "s4140959@student.rmit.edu.au",
+        "s4112949@student.rmit.edu.au"
+      ],
+      "created_by": "s4140959@student.rmit.edu.au"
     }
   ],
   "A3": [
