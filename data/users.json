@@ -1,0 +1,101 @@
+{
+  "s430001@rmit.edu.au": {
+    "name": "Alice Zhang",
+    "previous_groups": {
+      "A1": "A1-G1",
+      "A2": "A2-G1"
+    }
+  },
+  "s430002@rmit.edu.au": {
+    "name": "Rahul Patel",
+    "previous_groups": {
+      "A1": "A1-G1",
+      "A2": "A2-G1"
+    }
+  },
+  "s430003@rmit.edu.au": {
+    "name": "Mei Chen",
+    "previous_groups": {
+      "A1": "A1-G2"
+    }
+  },
+  "s430004@rmit.edu.au": {
+    "name": "Liam Nguyen",
+    "previous_groups": {
+      "A1": "A1-G2"
+    }
+  },
+  "s430005@rmit.edu.au": {
+    "name": "Fatima Khan",
+    "previous_groups": {
+      "A1": "A1-G3"
+    }
+  },
+  "s430006@rmit.edu.au": {
+    "name": "Daniel Lim",
+    "previous_groups": {
+      "A2": "A2-G2"
+    }
+  },
+  "s430007@rmit.edu.au": {
+    "name": "Sophie Tran",
+    "previous_groups": {
+      "A2": "A2-G2"
+    }
+  },
+  "s430008@rmit.edu.au": {
+    "name": "Tomoko Sato",
+    "previous_groups": {
+      "A2": "A2-G3"
+    }
+  },
+  "s430009@rmit.edu.au": {
+    "name": "John Lee",
+    "previous_groups": {
+      "A2": "A2-G3"
+    }
+  },
+  "s430010@rmit.edu.au": {
+    "name": "Nina Davis",
+    "previous_groups": {
+      "A2": "A2-G3"
+    }
+  },
+  "s430011@rmit.edu.au": {
+    "name": "Markus Eriksson",
+    "previous_groups": {
+      "A3": "A3-G1"
+    }
+  },
+  "s430012@rmit.edu.au": {
+    "name": "Sara Yusuf",
+    "previous_groups": {
+      "A3": "A3-G1"
+    }
+  },
+  "s430013@rmit.edu.au": {
+    "name": "Jun Ho",
+    "previous_groups": {
+      "A3": "A3-G2"
+    }
+  },
+  "s430014@rmit.edu.au": {
+    "name": "Emily Brown",
+    "previous_groups": {
+      "A3": "A3-G3"
+    }
+  },
+  "s430015@rmit.edu.au": {
+    "name": "Omar Abdullah",
+    "previous_groups": {
+      "A3": "A3-G3"
+    }
+  },
+  "testuser@student.rmit.edu.au": {
+    "name": "Test User",
+    "previous_groups": {
+        "A1": "A1-G4",
+        "A2": "A2-G4"
+    }
+  }
+}

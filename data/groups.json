@@ -1,0 +1,96 @@
+{
+  "A1": [
+    {
+      "group_id": "A1-G1",
+      "group_name": "Cyber Ninjas",
+      "members": [
+        "s430001@rmit.edu.au",
+        "s430002@rmit.edu.au"
+      ],
+      "created_by": "s430001@rmit.edu.au"
+    },
+    {
+      "group_id": "A1-G2",
+      "group_name": "Byte Hackers",
+      "members": [
+        "s430003@rmit.edu.au",
+        "s430004@rmit.edu.au"
+      ],
+      "created_by": "s430003@rmit.edu.au"
+    },
+    {
+      "group_id": "A1-G3",
+      "group_name": "CodeStorm",
+      "members": [
+        "s430005@rmit.edu.au"
+      ],
+      "created_by": "s430005@rmit.edu.au"
+    },
+    {
+      "group_id": "A1-G4",
+      "group_name": "Group",
+      "members": [
+        "testuser@student.rmit.edu.in"
+      ],
+      "created_by": "testuser@student.rmit.edu.in"
+    }
+  ],
+  "A2": [
+    {
+      "group_id": "A2-G1",
+      "group_name": "Cyber Ninjas",
+      "members": [
+        "s430001@rmit.edu.au",
+        "s430002@rmit.edu.au"
+      ],
+      "created_by": "s430001@rmit.edu.au"
+    },
+    {
+      "group_id": "A2-G2",
+      "group_name": "Packet Pirates",
+      "members": [
+        "s430006@rmit.edu.au",
+        "s430007@rmit.edu.au"
+      ],
+      "created_by": "s430006@rmit.edu.au"
+    },
+    {
+      "group_id": "A2-G3",
+      "group_name": "Red Team",
+      "members": [
+        "s430008@rmit.edu.au",
+        "s430009@rmit.edu.au",
+        "s430010@rmit.edu.au"
+      ],
+      "created_by": "s430008@rmit.edu.au"
+    }
+  ],
+  "A3": [
+    {
+      "group_id": "A3-G1",
+      "group_name": "Quantum Coders",
+      "members": [
+        "s430011@rmit.edu.au",
+        "s430012@rmit.edu.au"
+      ],
+      "created_by": "s430011@rmit.edu.au"
+    },
+    {
+      "group_id": "A3-G2",
+      "group_name": "ZeroDay",
+      "members": [
+        "s430013@rmit.edu.au"
+      ],
+      "created_by": "s430013@rmit.edu.au"
+    },
+    {
+      "group_id": "A3-G3",
+      "group_name": "Data Defenders",
+      "members": [
+        "s430014@rmit.edu.au",
+        "s430015@rmit.edu.au"
+      ],
+      "created_by": "s430014@rmit.edu.au"
+    }
+  ]
+}
