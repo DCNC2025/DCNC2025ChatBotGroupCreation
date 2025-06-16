@@ -875,7 +875,10 @@ body {{
 </style>
 """, unsafe_allow_html=True)
 #USERNAME = "testuser@student.rmit.edu.in"
-USERNAME = st.session_state.user_info["email"] if "user_info" in st.session_state and "email" in st.session_state.user_info else "Unknown"
+user_info = st.session_state.get("user_info")
+if not user_info or not isinstance(user_info, dict) or "email" not in user_info:
+    st.switch_page("login.py")
+USERNAME = user_info["email"]
 
 
 with open("data/assignments.json", "r") as f:

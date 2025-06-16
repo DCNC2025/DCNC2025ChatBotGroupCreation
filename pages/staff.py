@@ -5,11 +5,6 @@ import base64
 from datetime import datetime
 from dotenv import load_dotenv
 import streamlit.components.v1 as components
-import sys
-
-# Add parent directory to path so we can import features module
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from features.admin_management import (
     create_assignment_for_admin,
     delete_assignment_for_admin,
@@ -142,9 +137,7 @@ body {{
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    padding: 20px;
-    background-color: {PRIMARY_COLOR};
-    border-radius: 10px;
+    padding-top: 1rem;
 }}
 .logo-container img {{
     height: 70px;
@@ -153,9 +146,9 @@ body {{
     margin-bottom: 0.5rem;
 }}
 .logo-text {{
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
-    color: white;
+    color: {TEXT_COLOR};
     text-align: center;
 }}
 
@@ -177,26 +170,57 @@ body {{
     border-left: 5px solid {PRIMARY_COLOR};
 }}
 
-/* Button styling */
+/* Button styling with hover glare effect */
 .stButton>button, .stDownloadButton>button {{  
     border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    background-color: {PRIMARY_COLOR};
+    border-radius: 12px;
+    padding: 0.85rem 1.8rem;
+    background: linear-gradient(135deg, {PRIMARY_COLOR} 0%, #FF1744 100%);
     color: white !important;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(212,0,50,0.2);
     width: 100% !important;
+    position: relative;
+    overflow: hidden;
 }}
+
+.stButton>button::before, .stDownloadButton>button::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: all 0.6s ease;
+}}
+
 .stButton>button:hover, .stDownloadButton>button:hover {{
-    background-color: #c00020;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #FF1744 0%, {PRIMARY_COLOR} 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212,0,50,0.3);
 }}
+
+.stButton>button:hover::before, .stDownloadButton>button:hover::before {{
+    left: 100%;
+}}
+
 .stButton>button:active, .stDownloadButton>button:active {{
     transform: translateY(0px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}}
+
+/* Secondary button style */
+.stButton[kind="secondary"] > button, .stButton button[title*="Back"], .stButton button[title*="Cancel"] {{
+    background-color: {SECONDARY_TEXT_COLOR};
+    border-color: {SECONDARY_TEXT_COLOR};
+    color: white;
+}}
+
+.stButton[kind="secondary"] > button:hover, .stButton button[title*="Back"]:hover, .stButton button[title*="Cancel"]:hover {{
+    background-color: white;
+    color: {SECONDARY_TEXT_COLOR};
 }}
 
 /* Assignment card styling */
@@ -282,6 +306,50 @@ body {{
     border-radius: 3px !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }}
+
+/* Modern Input Field Styling */
+.stTextInput > div > div > input, .stTextArea > div > textarea, .stNumberInput > div > div > input, .stDateInput > div > div > input {{
+    border-radius: 12px;
+    border: 1px solid rgba(206,212,218,0.5);
+    padding: 1rem;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}}
+
+.stTextInput > div > div > input:focus, .stTextArea > div > textarea:focus, .stNumberInput > div > div > input:focus, .stDateInput > div > div > input:focus {{
+    border-color: {PRIMARY_COLOR};
+    box-shadow: 0 0 0 0.2rem rgba(212,0,50,0.25);
+    transform: translateY(-1px);
+}}
+
+.stTextInput > div > div > input:hover, .stTextArea > div > textarea:hover, .stNumberInput > div > div > input:hover, .stDateInput > div > div > input:hover {{
+    border-color: rgba(212,0,50,0.5);
+}}
+
+.stRadio > div, .stCheckbox > div {{
+    font-size: 1rem;
+}}
+
+/* Select box styling */
+.stSelectbox > div > div > div {{
+    border-radius: 12px;
+    border: 1px solid rgba(206,212,218,0.5);
+    background: rgba(255,255,255,0.9);
+    transition: all 0.3s ease;
+}}
+
+.stSelectbox > div > div > div:hover {{
+    border-color: rgba(212,0,50,0.5);
+}}
+
+.stSelectbox > div > div > div:focus {{
+    border-color: {PRIMARY_COLOR};
+    box-shadow: 0 0 0 0.2rem rgba(212,0,50,0.25);
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -348,21 +416,86 @@ with st.sidebar:
                 del st.session_state[key]
             st.switch_page('login.py')
 
-# Display logo
+    # st.markdown("<div style='display: flex; justify-content: center; width: 100%'>", unsafe_allow_html=True)
+    # if st.button("Logout"):
+    #     for key in list(st.session_state.keys()):
+    #         del st.session_state[key]
+    #     st.switch_page('login.py')
+    # st.markdown("</div>", unsafe_allow_html=True)
+
+# Get logo for use in header
 logo_base64 = get_logo_base64()
-if logo_base64:
-    st.markdown(f"""
-    <div class="logo-container" style="background-color: {PRIMARY_COLOR}; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+
+# Enhanced Custom Header with Title Card
+st.markdown(f"""
+<div class="custom-header">
+    <div class="header-content">
         <img src="data:image/png;base64,{logo_base64}" alt="RMIT Logo">
-        <div class="logo-text" style="color: white; font-size: 1.5em; margin-top: 10px;">Assignment Admin Panel</div>
+        <div class="header-text">
+            <h1>RMIT Assignment Admin Panel 🎓</h1>
+            <p>Manage assignments and student groups efficiently</p>
+        </div>
     </div>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown(f"""
-    <div class="logo-container" style="background-color: {PRIMARY_COLOR}; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-        <div class="logo-text" style="color: white; font-size: 1.5em;">Assignment Admin Panel</div>
-    </div>
-    """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
+
+# Add custom header styling
+st.markdown(f"""
+<style>
+/* Enhanced Custom Header Styling with Glass Effect */
+.custom-header {{
+    background: linear-gradient(135deg, rgba(212,0,50,0.95) 0%, rgba(0,0,0,0.90) 100%);
+    padding: 2.5rem 3rem;
+    border-radius: 20px;
+    margin: 1rem 0 3rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}}
+.custom-header::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}}
+.custom-header .header-content {{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}}
+.custom-header img {{
+    height: 75px; /* Slightly larger logo */
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}}
+.custom-header img:hover {{
+    transform: scale(1.1) rotate(-3deg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}}
+.custom-header .header-text h1 {{
+    color: white;
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}}
+.custom-header .header-text p {{
+    color: #E0E0E0; /* Light grey for subtitle */
+    margin: 0.4rem 0 0 0;
+    font-size: 1.1rem;
+    font-weight: 300;
+}}
+</style>
+""", unsafe_allow_html=True)
 
 # Show chat messages
 for i, msg in enumerate(st.session_state.messages):
