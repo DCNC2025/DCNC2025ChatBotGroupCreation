@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import random
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+import streamlit as st
 
 # Load .env file values
 load_dotenv()
@@ -16,9 +17,10 @@ print("SENDER_EMAIL:", os.getenv("SENDER_EMAIL"))
 # File to store user data
 USERS_FILE = "data/users.json"
 OTP_FILE = "data/otp.json"
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
-SENDER_EMAIL = os.getenv("SENDER_EMAIL")
-
+# SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+# SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+SENDGRID_API_KEY = st.secrets["SENDGRID_API_KEY"]
+SENDER_EMAIL = st.secrets["SENDER_EMAIL"]
 def get_aws_credentials_from_cognito():
     region = os.getenv("AWS_REGION")
     username = os.getenv("COGNITO_USERNAME")

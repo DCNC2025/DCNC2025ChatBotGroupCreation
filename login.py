@@ -6,8 +6,10 @@ import time
 import base64
 load_dotenv()
 
-SENDGRID_API_KEY = st.secrets.get("SENDGRID_API_KEY") or os.getenv("SENDGRID_API_KEY")
+# SENDGRID_API_KEY = st.secrets.get("SENDGRID_API_KEY") or os.getenv("SENDGRID_API_KEY")
 
+SENDGRID_API_KEY = st.secrets["SENDGRID_API_KEY"]
+SENDER_EMAIL = st.secrets["SENDER_EMAIL"]
 # Function to get logo as base64
 def get_logo_base64():
     try:
